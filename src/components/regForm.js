@@ -50,7 +50,6 @@ function RegistrationForm() {
         <Clipboard
           valueToCopy="0656890371"
           label="Copy"
-          onClick={(e) => e.preventDefault()}
         />
       </div>
           <hr className="mt-3" />
