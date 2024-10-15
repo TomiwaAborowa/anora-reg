@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Clipboard } from "flowbite-react";
 import { docFile, txtFile } from "./regAction.config";
 import { v4 } from "uuid";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { addDoc, collection } from "firebase/firestore";
 function RegistrationForm() {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+  // const handleFileChange = (event) => {
+  //   setSelectedFile(event.target.files[0]);
+  //   setIsButtonDisabled(false); // Enable the button immediately after file selection
+  // };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsButtonDisabled(true);
+    }, 10000); // Adjust the delay time as needed
+
+    return () => clearTimeout(timeoutId);
+  }, [selectedFile]);
+
   const [text, setText] = useState("");
   const [mail, setMail] = useState("");
   const [dial, setDail] = useState("");
   const [docp, setDocp] = useState("");
   const handleUpload = (e) => {
+    setSelectedFile(e.target.files[0]);
+    setIsButtonDisabled(false);
     console.log(e.target.files[0]);
     const pdfs = ref(docFile, `Pdfs/${v4()}`);
     uploadBytes(pdfs, e.target.files[0]).then((data) => {
@@ -19,7 +37,7 @@ function RegistrationForm() {
       });
     });
   };
-  const handleClick = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const valRef = collection(txtFile, "txtData");
     await addDoc(valRef, {
@@ -103,7 +121,9 @@ function RegistrationForm() {
             </div>
           </div>
           <button
-            onClick={handleClick}
+            onClick={handleSubmit}
+            type="button"
+            disabled={isButtonDisabled}
             className="text-white mt-6 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Submit
