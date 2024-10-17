@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -66,7 +65,7 @@ function Home() {
         type="button"
         className="inline-flex items-center rounded-md sm:mx-auto hover:bg-amber-400 bg-white px-3 py-2 font-bold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300"
       >
-        <Link to="/registration">Register Now</Link>
+        <a href="https://paystack.com/pay/zeyhc54q2m">Register Now</a>
       </button>
     </div>
   </div>
