@@ -145,6 +145,17 @@ Location            </label>
                 required
                 onChange={(e) => setGen(e.target.value)}
               />
+                <label className="block text-white font-semibold text-2xl mb-5 mt-2">
+                Why would you want to be part of Action Master Class?
+              </label>
+               <input
+                type="text"
+                id="description"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                placeholder=""
+                required
+                onChange={(e) => setGen(e.target.value)}
+              />
             {/* <div>
               <label className="block text-white font-semibold text-2xl mb-5 mt-2">
                 Upload Payment Receipt
